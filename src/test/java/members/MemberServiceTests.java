@@ -20,12 +20,6 @@ public class MemberServiceTests {
     private MemberService memberService;
 
     @Test
-    public void testListAll() throws Exception {
-        List<MemberDTO> list = memberService.listAll();
-        list.forEach(log::info);
-    }
-
-    @Test
     public void testRegister() throws Exception {
         MemberDTO dto = MemberDTO.builder()
                 .mid("member05")
@@ -33,5 +27,33 @@ public class MemberServiceTests {
                 .mname("tester")
                 .build();
         memberService.register(dto);
+    }
+
+    @Test
+    public void testListAll() throws Exception {
+        List<MemberDTO> list = memberService.listAll();
+        list.forEach(log::info);
+    }
+
+    @Test
+    public void testGet()  throws Exception {
+        MemberDTO memberDTO = memberService.get("member00");
+        log.info(memberDTO);
+    }
+
+    @Test
+    public void testEdit() throws Exception {
+        MemberDTO memberDTO = MemberDTO.builder()
+                .mid("member04")
+                .mpw("123456")
+                .mname("updatedTester")
+                .build();
+        memberService.edit(memberDTO);
+    }
+
+    @Test
+    public void testRemove() throws Exception {
+        String mid = "member04";
+        memberService.remove(mid);
     }
 }

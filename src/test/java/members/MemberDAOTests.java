@@ -3,6 +3,7 @@ package members;
 import com.ssg.membertest.members.dao.MemberDAO;
 import com.ssg.membertest.members.domain.MemberVO;
 import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,22 @@ public class MemberDAOTests {
                 .mname("tester")
                 .build();
         memberDAO.insert(vo);
+    }
+
+    @Test
+    public void testUpdate() throws Exception {
+        String mid = "member00";
+        MemberVO memberVO = MemberVO.builder()
+                .mid(mid)
+                .mpw("1234")
+                .mname("tester")
+                .build();
+        Assertions.assertTrue(memberDAO.updateOne(memberVO));
+    }
+
+    @Test
+    public void testDelete() throws Exception {
+        String mid = "member04";
+        Assertions.assertTrue(memberDAO.deleteOne(mid));
     }
 }
