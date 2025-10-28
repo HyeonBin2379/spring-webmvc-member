@@ -9,12 +9,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Member List Page</title>
 </head>
 <body>
+    <h1>Member List Page</h1>
     <ul>
         <c:forEach var="member" items="${memberList}">
-            <li>${member}</li>
+            <li>${member.mid} ${member.mname} ${member.mpw}</li>
         </c:forEach>
     </ul>
 </body>

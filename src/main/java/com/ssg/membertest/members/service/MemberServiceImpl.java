@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,13 +22,15 @@ public class MemberServiceImpl implements MemberService {
     private final ModelMapper modelMapper;
 
     @Override
-    public void register(MemberDTO memberDTO) {
+    @Transactional
+    public void joinMember(MemberDTO memberDTO) {
         MemberVO memberVO = modelMapper.map(memberDTO, MemberVO.class);
         memberMapper.insert(memberVO);
     }
 
     @Override
-    public List<MemberDTO> listAll() {
+    @Transactional(readOnly = true)
+    public List<MemberDTO> memberList() {
         List<MemberVO> memberVOList = memberMapper.findAll();
         return memberVOList.stream()
                 .map(memberVO -> modelMapper.map(memberVO, MemberDTO.class))
@@ -35,6 +38,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public MemberDTO get(String mid) {
         Optional<MemberVO> selected = memberMapper.findById(mid);
         return selected
@@ -43,12 +47,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public void write(MemberDTO member) {
-        MemberVO memberVO = modelMapper.map(member, MemberVO.class);
-        memberMapper.insert(memberVO);
-    }
-
-    @Override
+    @Transactional
     public void edit(MemberDTO member) {
         Optional<MemberVO> foundMember = memberMapper.findById(member.getMid());
         if (!foundMember.isPresent()) {
@@ -56,11 +55,12 @@ public class MemberServiceImpl implements MemberService {
         }
         MemberVO updated = foundMember.get();
         modelMapper.map(member, updated);
-        memberMapper.updateOne(updated);
+        memberMapper.update(updated);
     }
 
     @Override
+    @Transactional
     public void remove(String mid) {
-        memberMapper.deleteOne(mid);
+        memberMapper.delete(mid);
     }
 }

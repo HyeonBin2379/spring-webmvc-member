@@ -10,6 +10,6 @@ public interface MemberMapper {
     void insert(MemberVO vo);
     List<MemberVO> findAll();
     Optional<MemberVO> findById(String mid);
-    boolean updateOne(MemberVO vo);
-    boolean deleteOne(String mid);
+    boolean update(MemberVO vo);
+    boolean delete(String mid);
 }

@@ -20,7 +20,7 @@ public class MemberController {
 
     @GetMapping("/memberList")
     public void memberList(Model model) {
-        List<MemberDTO> memberList = memberService.listAll();
+        List<MemberDTO> memberList = memberService.memberList();
         model.addAttribute("memberList", memberList);
     }
 
@@ -31,7 +31,7 @@ public class MemberController {
 
     @PostMapping("/register")
     public String registerPost(MemberDTO memberDTO) {
-        memberService.register(memberDTO);
+        memberService.joinMember(memberDTO);
         return "redirect:/memberList";
     }
 }

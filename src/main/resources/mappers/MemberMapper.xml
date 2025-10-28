@@ -8,7 +8,19 @@
         select * from t_member;
     </select>
 
+    <select id="findById" resultType="com.ssg.membertest.members.domain.MemberVO">
+        select * from t_member where mid = #{mid}
+    </select>
+
     <insert id="insert" parameterType="com.ssg.membertest.members.domain.MemberVO">
         insert into t_member(mid, mpw, mname) values(#{mid}, #{mpw}, #{mname})
     </insert>
+
+    <update id="update" parameterType="com.ssg.membertest.members.domain.MemberVO">
+        update t_member set mpw = #{mpw}, mname = #{mname} where mid = #{mid}
+    </update>
+
+    <delete id="delete" parameterType="string">
+        delete from t_member where mid = #{mid}
+    </delete>
 </mapper>

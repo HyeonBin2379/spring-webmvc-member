@@ -11,6 +11,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.util.Optional;
 
 @Log4j2
 @ExtendWith(SpringExtension.class)
@@ -21,13 +22,27 @@ public class MemberMapperTests {
     private MemberMapper memberMapper;
 
     @Test
-    public void testSelectAll() throws Exception {
+    public void testSelectAll() {
         List<MemberVO> list = memberMapper.findAll();
         list.forEach(log::info);
     }
 
     @Test
-    public void testInsert() throws Exception {
+    public void testFindById() {
+        String mid = "member00";
+        Optional<MemberVO> optionalMemberVO = memberMapper.findById(mid);
+        Assertions.assertTrue(optionalMemberVO.isPresent());
+    }
+
+    @Test
+    public void testFindById2() {
+        String mid = "member99";
+        Optional<MemberVO> optionalMemberVO = memberMapper.findById(mid);
+        Assertions.assertFalse(optionalMemberVO.isPresent());
+    }
+
+    @Test
+    public void testInsert() {
         MemberVO vo = MemberVO.builder()
                 .mid("member04")
                 .mpw("3333")
@@ -37,19 +52,19 @@ public class MemberMapperTests {
     }
 
     @Test
-    public void testUpdate() throws Exception {
+    public void testUpdate() {
         String mid = "member00";
         MemberVO memberVO = MemberVO.builder()
                 .mid(mid)
                 .mpw("1234")
                 .mname("tester")
                 .build();
-        Assertions.assertTrue(memberMapper.updateOne(memberVO));
+        Assertions.assertTrue(memberMapper.update(memberVO));
     }
 
     @Test
-    public void testDelete() throws Exception {
+    public void testDelete() {
         String mid = "member04";
-        Assertions.assertTrue(memberMapper.deleteOne(mid));
+        Assertions.assertTrue(memberMapper.delete(mid));
     }
 }
