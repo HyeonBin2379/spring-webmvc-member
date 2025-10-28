@@ -1,4 +1,4 @@
-package com.ssg.membertest.members.domain;
+package com.ssg.membertest.members.v1.domain;
 
 import lombok.*;
 

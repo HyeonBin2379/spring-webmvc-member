@@ -1,7 +1,7 @@
-package members;
+package members.v1;
 
-import com.ssg.membertest.members.dao.MemberDAO;
-import com.ssg.membertest.members.domain.MemberVO;
+import com.ssg.membertest.members.v1.dao.MemberDAO;
+import com.ssg.membertest.members.v1.domain.MemberVO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

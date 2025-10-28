@@ -1,6 +1,6 @@
-package com.ssg.membertest.members.service;
+package com.ssg.membertest.members.v1.service;
 
-import com.ssg.membertest.members.dto.MemberDTO;
+import com.ssg.membertest.members.v1.dto.MemberDTO;
 
 import java.util.List;
 

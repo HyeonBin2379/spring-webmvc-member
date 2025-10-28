@@ -1,7 +1,7 @@
-package members;
+package members.v2;
 
-import com.ssg.membertest.members.dto.MemberDTO;
-import com.ssg.membertest.members.service.MemberService;
+import com.ssg.membertest.members.v2.dto.MemberDTO;
+import com.ssg.membertest.members.v2.service.MemberService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Log4j2
@@ -20,40 +21,42 @@ public class MemberServiceTests {
     private MemberService memberService;
 
     @Test
-    public void testRegister() throws Exception {
+    public void testJoinMember() throws Exception {
         MemberDTO dto = MemberDTO.builder()
-                .mid("member05")
-                .mpw("4444")
-                .mname("tester")
+                .userId("tester5")
+                .userPwd("4444")
+                .userName("테스터5")
+                .joinDate(LocalDate.now())
                 .build();
-        memberService.register(dto);
+        memberService.joinMember(dto);
     }
 
     @Test
     public void testListAll() throws Exception {
-        List<MemberDTO> list = memberService.listAll();
+        List<MemberDTO> list = memberService.memberList();
         list.forEach(log::info);
     }
 
     @Test
     public void testGet()  throws Exception {
-        MemberDTO memberDTO = memberService.get("member00");
-        log.info(memberDTO);
+        MemberDTO MemberDTO = memberService.get("tester1");
+        log.info(MemberDTO);
     }
 
     @Test
     public void testEdit() throws Exception {
-        MemberDTO memberDTO = MemberDTO.builder()
-                .mid("member04")
-                .mpw("123456")
-                .mname("updatedTester")
+        MemberDTO MemberDTO = com.ssg.membertest.members.v2.dto.MemberDTO.builder()
+                .userId("tester5")
+                .userPwd("123456")
+                .userName("updatedTester")
+                .userEmail("member04@test.com")
                 .build();
-        memberService.edit(memberDTO);
+        memberService.edit(MemberDTO);
     }
 
     @Test
     public void testRemove() throws Exception {
-        String mid = "member04";
-        memberService.remove(mid);
+        String userId = "tester5";
+        memberService.remove(userId);
     }
 }

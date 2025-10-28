@@ -1,0 +1,59 @@
+package members.v1;
+
+import com.ssg.membertest.members.v1.dto.MemberDTO;
+import com.ssg.membertest.members.v1.service.MemberService;
+import lombok.extern.log4j.Log4j2;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import java.util.List;
+
+@Log4j2
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration("file:src/main/webapp/WEB-INF/members/root-context.xml")
+public class MemberServiceTests {
+
+    @Autowired
+    private MemberService memberService;
+
+    @Test
+    public void testRegister() throws Exception {
+        MemberDTO dto = MemberDTO.builder()
+                .mid("member05")
+                .mpw("4444")
+                .mname("tester")
+                .build();
+        memberService.register(dto);
+    }
+
+    @Test
+    public void testListAll() throws Exception {
+        List<MemberDTO> list = memberService.listAll();
+        list.forEach(log::info);
+    }
+
+    @Test
+    public void testGet()  throws Exception {
+        MemberDTO memberDTO = memberService.get("member00");
+        log.info(memberDTO);
+    }
+
+    @Test
+    public void testEdit() throws Exception {
+        MemberDTO memberDTO = MemberDTO.builder()
+                .mid("member04")
+                .mpw("123456")
+                .mname("updatedTester")
+                .build();
+        memberService.edit(memberDTO);
+    }
+
+    @Test
+    public void testRemove() throws Exception {
+        String mid = "member04";
+        memberService.remove(mid);
+    }
+}

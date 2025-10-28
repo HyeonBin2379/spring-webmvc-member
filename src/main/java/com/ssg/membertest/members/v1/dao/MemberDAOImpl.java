@@ -1,7 +1,8 @@
-package com.ssg.membertest.members.dao;
+package com.ssg.membertest.members.v1.dao;
 
-import com.ssg.membertest.members.domain.MemberVO;
+import com.ssg.membertest.members.v1.domain.MemberVO;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -12,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
+@Qualifier("basicMemberDAO")
+//@Repository
 @RequiredArgsConstructor
 public class MemberDAOImpl implements MemberDAO {
 

@@ -1,6 +1,6 @@
-package com.ssg.membertest.members.dao;
+package com.ssg.membertest.members.v1.dao;
 
-import com.ssg.membertest.members.domain.MemberVO;
+import com.ssg.membertest.members.v1.domain.MemberVO;
 
 import java.util.List;
 import java.util.Optional;

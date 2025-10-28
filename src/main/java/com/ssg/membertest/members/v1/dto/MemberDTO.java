@@ -1,4 +1,4 @@
-package com.ssg.membertest.members.dto;
+package com.ssg.membertest.members.v1.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

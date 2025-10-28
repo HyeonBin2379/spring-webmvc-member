@@ -1,8 +1,8 @@
-package com.ssg.membertest.members.service;
+package com.ssg.membertest.members.v1.service;
 
-import com.ssg.membertest.members.dao.MemberDAO;
-import com.ssg.membertest.members.domain.MemberVO;
-import com.ssg.membertest.members.dto.MemberDTO;
+import com.ssg.membertest.members.v1.dao.MemberDAO;
+import com.ssg.membertest.members.v1.domain.MemberVO;
+import com.ssg.membertest.members.v1.dto.MemberDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import org.modelmapper.ModelMapper;
@@ -13,7 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ToString
-@Service
+//@Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
