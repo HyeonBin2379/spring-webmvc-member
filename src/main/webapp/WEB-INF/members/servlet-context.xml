@@ -16,7 +16,7 @@
     </bean>
 
     <!--  controller 패키지 내부의 서블릿 객체들을 빈 객체로 등록  -->
-    <context:component-scan base-package="com.ssg.membertest.members.v2.controller"/>
+    <context:component-scan base-package="com.ssg.membertest.members.controller"/>
     <!--  resources 폴더의 하위 파일들을 모두 매핑 대상으로 지정하고, 어노테이션 활성화 -->
     <mvc:annotation-driven/>
     <mvc:resources mapping="/resources/**" location="classpath:/static/"/>

@@ -1,8 +1,8 @@
-package com.ssg.membertest.members.v1.service;
+package com.ssg.membertest.members.service;
 
-import com.ssg.membertest.members.v1.dao.MemberDAO;
-import com.ssg.membertest.members.v1.domain.MemberVO;
-import com.ssg.membertest.members.v1.dto.MemberDTO;
+import com.ssg.membertest.members.domain.MemberVO;
+import com.ssg.membertest.members.dto.MemberDTO;
+import com.ssg.membertest.members.mapper.MemberMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import org.modelmapper.ModelMapper;
@@ -13,54 +13,54 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @ToString
-//@Service
+@Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
 
-    private final MemberDAO memberDAO;
+    private final MemberMapper memberMapper;
     private final ModelMapper modelMapper;
 
     @Override
-    public void register(MemberDTO memberDTO) throws Exception {
+    public void register(MemberDTO memberDTO) {
         MemberVO memberVO = modelMapper.map(memberDTO, MemberVO.class);
-        memberDAO.insert(memberVO);
+        memberMapper.insert(memberVO);
     }
 
     @Override
-    public List<MemberDTO> listAll() throws Exception {
-        List<MemberVO> memberVOList = memberDAO.selectAll();
+    public List<MemberDTO> listAll() {
+        List<MemberVO> memberVOList = memberMapper.findAll();
         return memberVOList.stream()
                 .map(memberVO -> modelMapper.map(memberVO, MemberDTO.class))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public MemberDTO get(String mid) throws Exception {
-        Optional<MemberVO> selected = memberDAO.selectOne(mid);
+    public MemberDTO get(String mid) {
+        Optional<MemberVO> selected = memberMapper.findById(mid);
         return selected
                 .map(memberVO -> modelMapper.map(memberVO, MemberDTO.class))
                 .orElseThrow(() -> new IllegalArgumentException("검색 실패"));
     }
 
     @Override
-    public void write(MemberDTO member) throws Exception {
+    public void write(MemberDTO member) {
         MemberVO memberVO = modelMapper.map(member, MemberVO.class);
-        memberDAO.insert(memberVO);
+        memberMapper.insert(memberVO);
     }
 
     @Override
-    public void edit(MemberDTO member) throws Exception {
-        Optional<MemberVO> foundMember = memberDAO.selectOne(member.getMid());
+    public void edit(MemberDTO member) {
+        Optional<MemberVO> foundMember = memberMapper.findById(member.getMid());
         if (!foundMember.isPresent()) {
             throw new IllegalArgumentException();
         }
         MemberVO updated = foundMember.get();
         modelMapper.map(member, updated);
-        memberDAO.updateOne(updated);
+        memberMapper.updateOne(updated);
     }
 
     @Override
-    public void remove(String mid) throws Exception {
-        memberDAO.deleteOne(mid);
+    public void remove(String mid) {
+        memberMapper.deleteOne(mid);
     }
 }

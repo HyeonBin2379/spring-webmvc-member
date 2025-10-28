@@ -44,12 +44,12 @@
 
     <!--  MyBatis를 사용하기 위한 SqlSessionFactory를 스프링 빈으로 등록  -->
     <!--    -->
-    <mybatis:scan base-package="com.ssg.membertest.members.v2.mapper"/>
+    <mybatis:scan base-package="com.ssg.membertest.members.mapper"/>
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!--  SqlSession을 설정할 데이터소스를 지정  -->
         <property name="dataSource" ref="dataSource"/>
         <!--  resources 폴더 내부의 mappers에 관한 하위 경로에 저장된 .xml 파일의 쿼리문을 매퍼 인터페이스와 연결  -->
-        <property name="mapperLocations" value="classpath:/mappers/**/*.xml"></property>
+        <property name="mapperLocations" value="classpath:/mappers/**/*.xml"/>
     </bean>
 </beans>

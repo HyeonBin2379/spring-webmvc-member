@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- Mapper 인터페이스와 동일한 이름(대소문자도 일치)의 xml을 작성 -->
+<mapper namespace="com.ssg.membertest.members.mapper.MemberMapper">
+    <select id="findAll" resultType="com.ssg.membertest.members.domain.MemberVO">
+        select * from t_member;
+    </select>
+
+    <insert id="insert" parameterType="com.ssg.membertest.members.domain.MemberVO">
+        insert into t_member(mid, mpw, mname) values(#{mid}, #{mpw}, #{mname})
+    </insert>
+</mapper>

@@ -1,4 +1,4 @@
-package com.ssg.membertest.members.v2.mapper;
+package com.ssg.membertest.members.mapper;
 
 public interface TimeMapper2 {
 

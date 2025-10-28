@@ -1,7 +1,7 @@
-package members.v1;
+package members.mapper;
 
-import com.ssg.membertest.members.v1.dao.MemberDAO;
-import com.ssg.membertest.members.v1.domain.MemberVO;
+import com.ssg.membertest.members.domain.MemberVO;
+import com.ssg.membertest.members.mapper.MemberMapper;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -15,14 +15,14 @@ import java.util.List;
 @Log4j2
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/members/root-context.xml")
-public class MemberDAOTests {
+public class MemberMapperTests {
 
-    @Autowired
-    private MemberDAO memberDAO;
+    @Autowired(required = false)
+    private MemberMapper memberMapper;
 
     @Test
     public void testSelectAll() throws Exception {
-        List<MemberVO> list = memberDAO.selectAll();
+        List<MemberVO> list = memberMapper.findAll();
         list.forEach(log::info);
     }
 
@@ -33,7 +33,7 @@ public class MemberDAOTests {
                 .mpw("3333")
                 .mname("tester")
                 .build();
-        memberDAO.insert(vo);
+        memberMapper.insert(vo);
     }
 
     @Test
@@ -44,12 +44,12 @@ public class MemberDAOTests {
                 .mpw("1234")
                 .mname("tester")
                 .build();
-        Assertions.assertTrue(memberDAO.updateOne(memberVO));
+        Assertions.assertTrue(memberMapper.updateOne(memberVO));
     }
 
     @Test
     public void testDelete() throws Exception {
         String mid = "member04";
-        Assertions.assertTrue(memberDAO.deleteOne(mid));
+        Assertions.assertTrue(memberMapper.deleteOne(mid));
     }
 }

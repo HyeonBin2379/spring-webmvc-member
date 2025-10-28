@@ -1,6 +1,6 @@
-package members.v2.mapper;
+package members.mapper;
 
-import com.ssg.membertest.members.v2.mapper.TimeMapper2;
+import com.ssg.membertest.members.mapper.TimeMapper2;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
